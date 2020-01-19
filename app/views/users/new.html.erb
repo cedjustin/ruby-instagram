@@ -1,0 +1,34 @@
+<div class="card col-7  sign-up-card mt-5 login-card">
+    <h1 class="text-center">Instagram</h1>
+    <p class="text-center">Sign up to see photos and videos from your friends.</p>
+    <hr>
+    <div class="card-body">
+    <%= form_with(model: @user, local: true) do |f| %>            
+        <div class="form-group">
+        <%= f.email_field :email, autofocus: true,placeholder:"Email", class:"form-control" %>
+        </div>
+        <div class="form-group">
+        <%= f.text_field :fullname, autofocus: true, placeholder:"Full Name", class:"form-control" %>
+        </div>
+        <div class="form-group">
+        <%= f.text_field :username, autofocus: true, placeholder:"Username", class:"form-control" %>
+        </div class="form-group sign-up-field">
+        <%= f.password_field :password, autocomplete: "off", placeholder:"Password", class:"form-control" %>
+        </div>            
+        <div class="form-group ml-4">
+        <%= f.password_field :password_confirmation, autocomplete: "off", placeholder:"Confirm Password ", class:"form-control sign-up-field" %>
+        </div>          
+        <div class="ml-4 text-center">
+        <%= f.submit "Sign up" , class:"btn btn-info " %>
+        </div>          
+    <% end %>
+    <p class="text-center">
+        By signing up, you agree to our Terms , Data Policy and Cookies Policy .
+    </p>
+    </div>
+    <div class="card col-7 mt-3  login-card">
+    <span class="card-body text-center">
+        Have an account? <%= link_to "Log in",new_session_path, class:"text-info"%>
+    </span>
+    </div> 
+</div> 

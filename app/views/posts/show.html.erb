@@ -1,0 +1,40 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light  home-nav static-top fixed-top  bg-nav" id="navbar">
+    <div class="container">    
+      <%=link_to image_tag("https://img.icons8.com/cute-clipart/50/000000/instagram-new.png",id:"logo"), posts_url, class:"logo"%>  
+      <h2 class="nav-brand">| Instagram</h2>
+      <div class="search-form">
+        <form class="form-inline my-4 ml-0 my-lg-0 ">
+          <input class="form-control rounded-square mr-3 search text-center" type="search" placeholder="Search ..." aria-label="Search">
+        </form> 
+      </div>         
+      <div class="collapse navbar-collapse " id="navbarResponsive">
+        <ul class="navbar-nav ml-auto ">                
+          <li class="nav-item mt-1 bd">
+            <%= link_to image_tag("https://img.icons8.com/carbon-copy/40/000000/name.png"),user_path(current_user.id),class: "text-dark text-decoration-none ml-2" %>
+          </li> 
+          <li class="nav-item mt-1 bd">
+            <%= link_to 'Posts',posts_path,class: " btn post text-light text-decoration-none ml-2 bg-ig" %>
+          </li>                    
+        </ul>
+      </div>
+    </div>
+  </nav>  
+</div>
+<div class="show-card d-flex justify-content-center align-items-center ">
+    <div>
+      <div class="card mb-2" style="width: 30rem;">
+        <%= image_tag @post.image.url(), class: "card-img-top" %>
+        <div class="card-body">
+          <% @users.each do |user| %>
+            <%if user.id == @post.user_id%>
+              <h5 class="card-title"><%= user.username %></h5>
+            <%end%>
+          <% end %>
+          <p class="card-text"><%= @post.content %></p>
+          <%= link_to 'Edit', edit_post_path(@post), class: "card-link btn bg-ig text-light" %>
+          <%= link_to 'Back', posts_path ,class:"btn bg-ig text-light"%>
+        </div>
+      </div>
+    </div>
+</div>

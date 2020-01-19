@@ -1,0 +1,155 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light  home-nav static-top fixed-top  bg-nav" id="navbar">
+    <div class="container">    
+      <%=link_to image_tag("https://img.icons8.com/cute-clipart/50/000000/instagram-new.png",id:"logo"), posts_url, class:"logo"%>  
+      <h2 class="nav-brand">| Instagram</h2>
+      <div class="search-form">
+        <form class="form-inline my-4 ml-0 my-lg-0 ">
+          <input class="form-control rounded-square mr-3 search text-center" type="search" placeholder="Search ..." aria-label="Search">
+        </form> 
+      </div>         
+      <div class="collapse navbar-collapse " id="navbarResponsive">
+        <ul class="navbar-nav ml-auto ">                
+          <li class="nav-item mt-1 bd">
+            <%= link_to image_tag("https://img.icons8.com/carbon-copy/40/000000/name.png"),user_path(current_user.id),class: "text-dark text-decoration-none ml-2" %>
+          </li> 
+          <li class="nav-item mt-1 bd">
+            <button class= " btn post text-light text-decoration-none ml-2 bg-ig" id="post-btn" onclick="ShowDiv()" type="button">Post </button>
+          </li>           
+        </ul>
+      </div>
+    </div>
+  </nav>  
+</div>
+<div class="container full-screen ">
+  <div class="all-content">
+    <div class="row">      
+      <div class="col-8 ">
+        <nav class="navbar navbar-light bg-light border mt-3">
+          <span class="navbar-brand">Create post</span>
+        </nav>
+        <div id="post-container" class="container bg-white pos">
+          <div>
+            <div class="row d-flex align-items-center">
+              <div class="container">
+                <%= render 'form', post: @post %>
+              </div>
+            </div>            
+          </div>
+        </div>
+        <div class="mt-3">
+          <% @posts.each do |post| %>
+            <div class="card mb-2" style="width: 100%;">
+              <%= image_tag post.image.url(), class: "card-img-top" %>
+              <div class="card-body">
+                <% @users.each do |user| %>
+                  <%if user.id == post.user_id%>
+                    <h5 class="card-title">
+                    <%= user.username %></h5>
+                  <%end%>
+                <% end %>
+                <div class="card">
+                  <div class="card-body">
+                    <p class="card-text">
+                      <%= post.content %>
+                      <hr>
+                      <div class="favorite">                    
+                        <%= link_to like_post_path(post),class: "like-item", method: :put do %>  
+                          <button type="button" class="btn " aria-label="Left Align">                        
+                            <span><img src="https://img.icons8.com/material-sharp/24/000000/thumb-up.png"></span>
+                          </button>
+                        <% end%> 
+                        <%= link_to unlike_post_path(post), class: "like-item", method: :put do %>  
+                          <button type="button" class="btn " aria-label="Left Align">                        
+                            <span><img src="https://img.icons8.com/material-outlined/24/000000/thumbs-down.png"></span>                                                
+                          </button>
+                        <% end%>                                 
+                      </div>
+                      <div>
+                        <span class="badge badge-dark like-count"><%= post.get_upvotes.size %> Likes</span>
+                      </div>                      
+                    </p>
+                  </div>
+                </div>
+                <% if @current_user.id == post.user_id %> 
+                  <%= link_to 'Show', post, class: "card-link btn btn-outline-dark btn-sm" %>
+                  <%= link_to 'Edit', edit_post_path(post), class: "card-link btn btn-outline-dark btn-sm" %>
+                  <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' }, class: "card-link btn btn-outline-dark btn-sm" %>
+                <% else %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-2 container index-info">
+        <div class="row mt-3 d-flex align-items-center">
+          <%- if current_user.image.exists? %><br>
+            <%= image_tag current_user.image.url(), class: " small-avatar mr-2 rounded-circle ml-2" %>
+          <% else%>
+            <%= image_tag("https://img.icons8.com/color/48/000000/user-male-skin-type-5.png" , class: " small-avatar mr-2 rounded-circle")  %>      
+          <% end %> <br>
+          <% if logged_in? %>
+            <p class="text-dark mt-3"> <%= @current_user.username%> </p>
+          <% else %>
+          <% end %>
+        </div>
+        <div class="card mt-3" style="width:18rem;">           
+          <div class="card-body">
+            <h5 class=" lead ml-2">Stories</h5>
+            <div>
+              <div class="row">
+                <div class="col-1">
+                  <%=image_tag("https://img.icons8.com/ultraviolet/40/000000/gender-neutral-user.png" , class: " mt-2 prof rounded-circle")  %>
+                </div>
+                <div class="col-5 ml-4 ">
+                  <span class="feed-user-info ">
+                    <strong>Cedrick</strong> <br> 
+                    <span>2 HOURS AGO</span> 
+                  </span>               
+                </div>
+              </div> 
+              <div class="row">
+                <div class="col-1">
+                  <%=image_tag("https://img.icons8.com/ultraviolet/40/000000/gender-neutral-user.png" , class: " mt-2 prof rounded-circle")  %>
+                </div>
+                <div class="col-5 ml-4 ">
+                  <span class="feed-user-info ">
+                    <strong>Lelee</strong> <br> 
+                    <span>3 HOURS AGO</span> 
+                  </span>               
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <%=image_tag("https://img.icons8.com/ultraviolet/40/000000/gender-neutral-user.png" , class: " mt-2 prof rounded-circle")  %>
+                </div>
+                <div class="col-5 ml-4 ">
+                  <span class="feed-user-info ">
+                    <strong>Winter</strong> <br> 
+                    <span>5 HOURS AGO</span> 
+                  </span>               
+                </div>
+              </div>                
+            </div>
+          </div>         
+        </div>
+      </div>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-1"></div>
+    </div>
+  </div>
+</div>
+<div> 
+  <script>
+    $(document).ready(function () {
+      $('#post-btn').click(function () {
+        $('#post-container').css('display', 'block');
+        $('.pos').css("color", "red");
+        $("#post-container").fadeOut("slow");
+        $('#post-container').toggleClass("in");
+      });
+    });
+  </script>
+</div>

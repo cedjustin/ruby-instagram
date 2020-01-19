@@ -1,0 +1,82 @@
+<div> 
+  <nav class="navbar navbar-expand-lg navbar-light  home-nav static-top fixed-top  bg-nav" id="navbar">
+    <div class="container">    
+      <%=link_to image_tag("https://img.icons8.com/cute-clipart/50/000000/instagram-new.png",id:"logo"), posts_url, class:"logo"%>  
+      <h2 class="nav-brand">| Instagram</h2>
+      <div class="search-form">
+        <form class="form-inline my-4 ml-0 my-lg-0 ">
+          <input class="form-control rounded-square mr-3 search text-center" type="search" placeholder="Search ..." aria-label="Search">
+        </form> 
+      </div>         
+      <div class="collapse navbar-collapse " id="navbarResponsive">
+        <ul class="navbar-nav ml-auto ">           
+          <li class="nav-item mt-1 bd">
+            <%= link_to 'Posts',posts_path,class: " btn post text-light text-decoration-none ml-2 bg-ig" %>
+          </li>                    
+        </ul>
+      </div>
+    </div>
+  </nav>  
+</div>
+<div class="container profile-info">
+  <div class="container mt-5">
+    <div class="card profile" >
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-5">
+            <%- if current_user.image.exists? %><br>
+              <%= image_tag current_user.image.url(), class: " real-prof-pic rounded-circle" %>
+            <% else%>
+              <%= image_tag("https://img.icons8.com/ultraviolet/95/000000/gender-neutral-user.png" , class: " mt-4 ml-5 avatar-profile rounded-circle")  %>      
+            <% end %> <br>
+            <div>
+              <p>
+                <strong>Username:</strong>
+                <%= @user.username %>
+              </p>
+              <p>
+                <strong>Email:</strong>
+                <%= @user.email %>
+              </p>
+              <div>
+                <div class="row">
+                  <div class="col-md-6 ">
+                    <span><%= link_to "Edit Profile",edit_user_path(current_user.id), class:"btn bg-ig "%></span>
+                  </div>
+                  <div class="col-md-6">
+                    <span><%= link_to "Logout", session_path(current_user.id), method: :delete, class:"btn btn-dark "%></span><br>
+                  </div>
+                </div>               
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="card">
+              <h2 class="card-header">Favorites</h2>
+              <div class="card-body">
+                <div class="card-columns profile-posts">
+                  <% Post.all.each do |post| %>            
+                    <% if current_user.voted_up_on? (post) %>
+                      <div class="card profile-post" >
+                        <%if post.image.present?%>
+                          <%= image_tag post.image.url(), class: " card-img-top profile-post-pic "%>
+                        <%else%>
+                        <%end%>
+                        <div class="card-body">
+                          <p class="card-text">
+                            <%= post.content%><br>
+                            <span class="badge badge-dark"><%= post.get_upvotes.size %> Likes</span>
+                          </p>
+                        </div>
+                      </div>  
+                    <%end%>
+                  <%end%>            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
