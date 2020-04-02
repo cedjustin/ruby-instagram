@@ -1,4 +1,4 @@
-<%= form_with(model: post, local: true, html: { multipart: true } ) do |form| %>
+<%= form_with(model: post, local: true, html: { multipart: true }, url: choose_new_or_edit  ) do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <ul>
@@ -16,6 +16,7 @@
   <%= form.hidden_field :user_id, :value => current_user.id %>
 
   <%= form.file_field :image%>
+  <%= form.hidden_field  :image_cache %>
 
   <div class="actions mt-3 text-center mb-2">
     <%= form.submit "post", class:"btn btn-outline-dark "  %>

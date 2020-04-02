@@ -84,7 +84,7 @@
       </div>
       <div class="col-2 container index-info">
         <div class="row mt-3 d-flex align-items-center">
-          <%- if current_user.image.exists? %><br>
+          <%- if current_user.image.present? %><br>
             <%= image_tag current_user.image.url(), class: " small-avatar mr-2 rounded-circle ml-2" %>
           <% else%>
             <%= image_tag("https://img.icons8.com/color/48/000000/user-male-skin-type-5.png" , class: " small-avatar mr-2 rounded-circle")  %>      
