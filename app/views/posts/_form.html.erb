@@ -1,4 +1,4 @@
-<%= form_with(model: post, local: true, html: { multipart: true }, url: choose_new_or_edit  ) do |form| %>
+<%= form_with(model: post, local: true, html: { multipart: true }, url: choose_new_or_edit ) do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <ul>
@@ -10,12 +10,12 @@
   <% end %>
  
   <div class="field">
-    <%= form.text_field :content, class: "form-control" %>
+    <%= form.text_field :content, class: "form-control mt-3" %>
   </div>
 
   <%= form.hidden_field :user_id, :value => current_user.id %>
 
-  <%= form.file_field :image%>
+  <%= form.file_field :image, class: "mt-2"%>
   <%= form.hidden_field  :image_cache %>
 
   <div class="actions mt-3 text-center mb-2">

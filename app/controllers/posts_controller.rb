@@ -8,7 +8,6 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-
   def show
     @users = User.all
   end
@@ -18,11 +17,8 @@ class PostsController < ApplicationController
     current_user = @current_user
   end
 
-
   def edit
   end
-
-
 
   def create
     @post = Post.new(post_params)
@@ -32,7 +28,6 @@ class PostsController < ApplicationController
       render :new
     end
   end
-
 
   def update
     if @post.update(post_params)
