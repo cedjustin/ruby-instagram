@@ -47,6 +47,12 @@ class PostsController < ApplicationController
     redirect_to posts_url
   end
 
+  def confirm
+    @post = current_user.posts.build(post_params)
+    render :new if @post.invalid?
+  end
+
+
   #upvotes and downvotes(like/ dislike)
   def upvote
     @post.upvote_from current_user
