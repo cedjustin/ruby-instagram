@@ -24,7 +24,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-5">
-            <%- if current_user.image.exists? %><br>
+            <%- if current_user.image.present? %><br>
               <%= image_tag current_user.image.url(), class: " real-prof-pic rounded-circle" %>
             <% else%>
               <%= image_tag("https://img.icons8.com/ultraviolet/95/000000/gender-neutral-user.png" , class: " mt-4 ml-5 avatar-profile rounded-circle")  %>      

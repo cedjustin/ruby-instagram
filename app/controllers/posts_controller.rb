@@ -20,6 +20,10 @@ class PostsController < ApplicationController
   def edit
   end
 
+  mail = Mail.new do
+    body 'you post have been confirmed and uploaded'
+  end
+
   def create
     @post = Post.new(post_params)
     if @post.save
