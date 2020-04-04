@@ -8,8 +8,9 @@
 
 # 1.upto(50) do |num|                                                   
 #     User.create!(username:"user#{num}",email:"user#{num}@gmail.com",password:"users#{num}",password_confirmation:"users#{num}")       
-# end   
+# end  
 
-1.upto(25) do |num|                                                   
-    Post.create!(content:"new stuff#{num}",user_id:1,image_file_name:"retro1.jpg",image_content_type:"image/jpeg",image_file_size:"3761#{num}",image_updated_at:2020-01-19)       
+
+1.upto(50) do |num|                                                   
+    User.create!(username: "cedrick#{num}",email: "cedrick#{num}@gmail.com", password: '123456', password_confirmation: '123456', image:"retro1.jpg")
 end   
